@@ -272,3 +272,29 @@ ok     hass_backlog: statuses
 
 RESULT: OK
 
+### 2026-11-19T11:23:14Z bash tp2.2026.check.sh m3
+ok     run_all.sh: strict mode
+ok     run_all.sh: run 1 exits 0
+ok     run_all.sh: run 2 exits 0
+ok     run_all.sh: the second run gives the same results
+ok     your results folder is what the scripts produce
+ok     logs/run.log: lines start with a UTC time
+ok     run_all.sh: stops with an error when an input is corrupted
+FAIL missing or empty: README.md
+
+RESULT: FAIL
+
+### 2026-11-19T11:31:58Z bash tp2.2026.check.sh m3
+ok     run_all.sh: strict mode
+ok     run_all.sh: run 1 exits 0
+ok     run_all.sh: run 2 exits 0
+ok     run_all.sh: the second run gives the same results
+ok     your results folder is what the scripts produce
+ok     logs/run.log: lines start with a UTC time
+ok     run_all.sh: stops with an error when an input is corrupted
+ok     README.md: at least 6 x Claim
+ok     README.md: at least 6 x Evidence
+ok     README.md: at least 6 x Limit
+
+RESULT: OK
+
