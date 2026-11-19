@@ -1,0 +1,94 @@
+### 2026-11-19T10:31:15Z bash -c bash --version | head -n 1; gawk --version | head -n 1; curl --version | head -n 1; git --version; sha256sum --version | head -n 1
+GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)
+GNU Awk 5.2.1, API 3.2, PMA Avon 8-g1, (GNU MPFR 4.2.1, GNU MP 6.3.0)
+curl 8.5.0 (x86_64-pc-linux-gnu) libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.10
+git version 2.43.0
+sha256sum (GNU coreutils) 9.4
+
+### 2026-11-19T10:32:57Z bash scripts/00_fetch.sh
+sha256sum: ../SHA256SUMS: No such file or directory
+
+NOTE: first run failed because data/SHA256SUMS was missing; created it and ran again.
+### 2026-11-19T10:34:02Z bash scripts/00_fetch.sh
+dah_completed.csv: OK
+dah_d1.csv: OK
+dah_d2.csv: OK
+dah_d3.csv: OK
+dah_d4.csv: OK
+dah_d5.csv: OK
+matches.csv: OK
+web_2025-10.csv: OK
+
+### 2026-11-19T10:35:36Z bash scripts/01_inventory.sh
+file	records	fields_header	lines_other_fields	crlf_lines	final_newline
+dah_completed.csv	100	4	24	100	no
+dah_d1.csv	3002	3	323	0	yes
+dah_d2.csv	100	3	18	0	no
+dah_d3.csv	100	3	11	0	no
+dah_d4.csv	100	3	10	0	no
+dah_d5.csv	100	3	8	0	no
+matches.csv	2744	6	0	2745	yes
+web_2025-10.csv	45260	6	0	0	yes
+
+### NOTES Task 1.1
+- web_2025-10.csv: I observed 6 header fields, 0 CR and quotes around every value, so I must remove the quotes and drop hash_src_ip; it does not show empty values (city_name) or rows from non-national operators.
+- matches.csv: I observed 2745 lines with a CR (all lines), so I must remove \r before using the last field; it does not show the date format (dd.mm.yyyy, some without a year).
+- dah_d1.csv: I observed 323 lines with another number of fields on a plain comma split, so I must use a quote-aware parser (commas and "" inside quotes); it does not show extra spaces or tabs, nor repeated sentences.
+- dah_d2.csv to dah_d5.csv: I observed no final newline and 8 to 18 lines with other field counts, so I must count rows with awk (not wc -l) and parse quotes; it does not show how many rows have empty translations.
+- dah_completed.csv: I observed 4 header fields, CRLF on 100 lines and no final newline, so I must remove \r, drop the empty 4th column and parse quotes; it does not show whether the translations are correct.
+### 2026-11-19T10:37:53Z bash scripts/02_web_clean.sh
+web_clean.csv: 45261 lignes (en-tete compris)
+date,city_name,isp_name,os_name,web_client
+2025-10-01,,RIMATEL,Android,Samsung Internet
+2025-10-01,,RIMATEL,Android,Samsung Internet
+
+### 2026-11-19T10:38:47Z bash scripts/03_matches_clean.sh
+matches_clean.csv: 2744 matchs
+date_status :
+   2590 full
+    154 inferred
+Test de la regle (dates completes, saisons AAAA/AAAA) :
+  22 x Ligue 1 2019/2020 mois 10 (source 2020, regle 2019)
+  30 x Ligue 1 2019/2020 mois 09 (source 2020, regle 2019)
+  5 x Championnat D1 2007/2008 mois 08 (source 2008, regle 2007)
+lignes testees=2326  annee differente=57
+
+### 2026-11-19T10:39:46Z bash scripts/04_corpus_clean.sh
+data/raw/dah_d1.csv : nombre de champs par ligne (methode FPAT) -> nombre de lignes
+   3003 3
+data/raw/dah_d3.csv : nombre de champs par ligne (methode FPAT) -> nombre de lignes
+    101 3
+data/clean/hass_base.tsv : 3 champ(s), 3002 paires
+data/clean/hass_completed.tsv : 3 champ(s), 100 paires
+
+### NOTES Task 1.3
+- I observed 154 dates without a year, all in Ligue 1 2024/2025, so I marked them date_status=inferred with the working rule (months 08-12 = first year, 01-07 = second year).
+- I observed that the rule gives another year than the source on 57 of 2326 full dates in two-year seasons (52 in Ligue 1 2019/2020, months 09-10 of 2020; 5 in Championnat D1 2007/2008, month 08 of 2008), so the rule fails when a season runs late; it does not show whether the 154 inferred dates are right.
+### NOTES Task 1.4
+- I observed 323 lines of dah_d1.csv with other field counts on a plain comma split but 3 fields on all 3003 lines with gawk FPAT (and 3 on all 101 lines of dah_d3.csv), so the extra commas are inside quoted fields; it does not show whether a translation is correct or complete.
+### 2026-11-19T10:45:25Z bash tp2.2026.check.sh m1
+bash: tp2.2026.check.sh: No such file or directory
+
+### 2026-11-19T10:48:32Z bash tp2.2026.check.sh m1
+tp2.2026.check.sh: line 21: syntax error: unexpected end of file
+
+### 2026-11-19T10:50:39Z bash tp2.2026.check.sh m1
+ok     inventory header
+ok     one inventory row per raw file
+ok     web_clean: 5 fields on every line
+ok     web_clean: no hash_src_ip column
+ok     web_clean: no quotes
+ok     web_clean: same number of lines as the source
+ok     matches_clean: header
+ok     matches_clean: 8 fields on every line
+ok     matches_clean: no carriage return
+ok     matches_clean: dates and date_status
+ok     matches_clean: result agrees with goals
+ok     matches_clean: inferred exactly where the source date has no year
+ok     matches_clean: no match lost
+ok     hass_base: 3 tab-separated fields on every line
+ok     hass_base: no carriage return
+ok     hass_base: no sentence pair lost
+
+RESULT: OK
+
