@@ -1,0 +1,28 @@
+sentence_pairs: 3002
+distinct_english_sentences: 2985
+sentences_appearing_more_than_once: 16
+extra_rows: 17
+avg_words_per_english_sentence: 6.06 (18196 words / 3002 sentences)
+top10_english_words (count, word; stoplist removed):
+    261 t
+    217 your
+    193 do
+    188 s
+    181 me
+    165 are
+    158 what
+    156 that
+    155 have
+    149 can
+hassaniya_en_tokens_with_digit: 5062 of 12329 tokens
+top10_hassaniya_en_tokens (count, token; allowed chars a-z 0-9):
+    277 mn
+    164 ma
+    120 v
+    117 4e
+    102 chi
+     91 w
+     90 3le
+     90 lahi
+     78 li
+     75 lehi

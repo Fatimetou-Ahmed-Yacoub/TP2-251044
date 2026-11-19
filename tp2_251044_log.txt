@@ -92,3 +92,183 @@ ok     hass_base: no sentence pair lost
 
 RESULT: OK
 
+### 2026-11-19T11:03:08Z bash scripts/05_web_profile.sh
+records: 45260
+distinct_os_name (empty counts as a value): 6
+no_city_name: 3339 (7.38% of 45260 records)
+iOS: 46.18% of 45260 records | 46.80% of 44655 records with known OS
+Android: 39.34% of 45260 records | 39.87% of 44655 records with known OS
+mobile (iOS+Android): 85.51% of 45260 records | 86.67% of 44655 records with known OS
+top5_web_client (count, client):
+  14879 Mobile Safari
+   9668 Chrome Mobile
+   6205 Samsung Internet
+   4888 FacebookBot
+   2361 Other
+date,os_name,count
+2025-10-01,iOS,2285
+2025-10-01,Android,1986
+2025-10-02,iOS,1399
+
+### 2026-11-19T11:04:24Z bash scripts/06_web_enrich.sh
+lignes: web_clean=45261 web_enriched=45261
+classes :
+   4888 bot
+  32956 browser
+   4597 in_app
+    389 library
+   2430 unmapped
+clients unmapped (records, client) :
+   2361 Other
+     51 Google
+     15 Android
+      1 Apple Mail
+      1 Client
+      1 PDFExpert
+
+### 2026-11-19T11:04:58Z bash scripts/07_web_daily.sh
+CHINGUITEL: seuil P90 = 196
+MATTEL: seuil P90 = 329
+MAURITEL: seuil P90 = 1511
+RIMATEL: seuil P90 = 215
+results/web_daily_isp_251044.csv : 124 lignes
+jours busy par operateur :
+CHINGUITEL 2025-10-01 472
+CHINGUITEL 2025-10-02 283
+CHINGUITEL 2025-10-03 204
+CHINGUITEL 2025-10-08 196
+MATTEL 2025-10-01 596
+MATTEL 2025-10-02 432
+MATTEL 2025-10-03 329
+MATTEL 2025-10-06 375
+MAURITEL 2025-10-01 3154
+MAURITEL 2025-10-02 1954
+MAURITEL 2025-10-03 1696
+MAURITEL 2025-10-06 1511
+RIMATEL 2025-10-01 463
+RIMATEL 2025-10-02 264
+RIMATEL 2025-10-03 225
+RIMATEL 2025-10-08 215
+
+### NOTES Task 2.3 (focus ISP CHINGUITEL)
+- I observed a P90 threshold of 196 records/day for CHINGUITEL (nearest rank 28 of 31 days), so its busy days are 2025-10-01 (472), 10-02 (283), 10-03 (204) and 10-08 (196); it does not show why these days are busy, and the first days may reflect how the sample was drawn.
+- I observed 287 bot records of 3956 CHINGUITEL records (7.25%), so FacebookBot is a visible share of its traffic; it does not measure automation, only the client name.
+### 2026-11-19T11:06:08Z bash scripts/08_league.sh
+Championnat_D1_2007_2008.csv
+Championnat_D1_2009.csv
+Championnat_D1_2010.csv
+Championnat_D1_2010_2011.csv
+Championnat_D1_2011_2012.csv
+Championnat_D1_2012_2013.csv
+Championnat_D1_2013_2014.csv
+Championnat_D1_2014_2015.csv
+Championnat_D1_2015_2016.csv
+Championnat_D1_2016_2017.csv
+Ligue_1_2018_2019.csv
+Ligue_1_2019_2020.csv
+Ligue_1_2020_2021.csv
+Ligue_1_2021_2022.csv
+Ligue_1_2022_2023.csv
+Ligue_1_2023_2024.csv
+Ligue_1_2024_2025.csv
+Super_D1_2017_2018.csv
+
+### 2026-11-19T11:06:09Z head -n 4 results/tables/Ligue_1_2018_2019.csv
+team,played,goals_for,goals_against,diff,points
+Nouadhibou,26,47,11,36,59
+ASAC Concorde,26,47,31,16,47
+Kedia,26,30,21,9,44
+
+### 2026-11-19T11:06:50Z bash scripts/09_seasons.sh
+season,teams,matches,expected_matches,complete
+Championnat D1 2007/2008,12,130,132,no
+Championnat D1 2009,12,132,132,yes
+Championnat D1 2010,12,132,132,yes
+Championnat D1 2010/2011,9,72,72,yes
+Championnat D1 2011/2012,14,182,182,yes
+Championnat D1 2012/2013,14,182,182,yes
+Championnat D1 2013/2014,6,30,30,yes
+Championnat D1 2014/2015,14,182,182,yes
+Championnat D1 2015/2016,13,156,156,yes
+Championnat D1 2016/2017,14,182,182,yes
+Ligue 1 2018/2019,14,182,182,yes
+Ligue 1 2019/2020,14,182,182,yes
+Ligue 1 2020/2021,8,32,56,no
+Ligue 1 2021/2022,14,182,182,yes
+Ligue 1 2022/2023,14,182,182,yes
+Ligue 1 2023/2024,14,182,182,yes
+Ligue 1 2024/2025,16,240,240,yes
+Super D1 2017/2018,14,182,182,yes
+result,matches
+home_win,1086
+away_win,901
+draw,757
+
+### NOTES Task 2.4 (focus season Ligue 1 2018/2019)
+- I observed Nouadhibou 59 pts, ASAC Concorde 47 and Kedia 44 at the top of Ligue 1 2018/2019 (14 teams, 182 of 182 matches), so the table is complete; it does not show penalties, forfeits or any point deduction not in the results file.
+- I observed 2 seasons with complete=no (Championnat D1 2007/2008: 130 of 132; Ligue 1 2020/2021: 32 of 56), so their tables must not be read as final; it does not show whether matches are missing from the source or were never played.
+### NOTES Task 2.4 (focus season Ligue 1 2018/2019)
+- I observed Nouadhibou 59 pts, ASAC Concorde 47 and Kedia 44 at the top of Ligue 1 2018/2019 (14 teams, 182 of 182 matches), so the table is complete; it does not show penalties, forfeits or any point deduction not in the results file.
+- I observed 2 seasons with complete=no (Championnat D1 2007/2008: 130 of 132; Ligue 1 2020/2021: 32 of 56), so their tables must not be read as final; it does not show whether matches are missing from the source or were never played.
+### 2026-11-19T11:13:45Z bash scripts/10_corpus_profile.sh
+sentence_pairs: 3002
+distinct_english_sentences: 2985
+sentences_appearing_more_than_once: 16
+extra_rows: 17
+avg_words_per_english_sentence: 6.06 (18196 words / 3002 sentences)
+top10_english_words (count, word; stoplist removed):
+    261 t
+    217 your
+    193 do
+    188 s
+    181 me
+    165 are
+    158 what
+    156 that
+    155 have
+    149 can
+hassaniya_en_tokens_with_digit: 5062 of 12329 tokens
+top10_hassaniya_en_tokens (count, token; allowed chars a-z 0-9):
+    277 mn
+    164 ma
+    120 v
+    117 4e
+    102 chi
+     91 w
+     90 3le
+     90 lahi
+     78 li
+     75 lehi
+
+### 2026-11-19T11:14:51Z bash scripts/11_backlog.sh
+data/clean/hass_backlog.tsv : 400 lignes
+status,rows
+filled,99
+in_base,3
+prefilled,3
+todo,295
+
+### NOTES Task 2.5
+- I observed 3002 sentence pairs but 2985 distinct English sentences (16 repeated, 17 extra rows), so counts of "sentences" depend on de-duplication; it does not show whether repeated rows have the same translation.
+- I observed 5062 of 12329 hassaniya-en tokens with a digit, so digits are part of the Latin spelling (3, 7, 2, 4, 5 for Arabic sounds) and I allow a-z and 0-9; it does not show spelling variants of the same word.
+- I observed 400 contribution rows: 295 todo, 99 filled, 3 prefilled, 3 in_base, so most of the backlog still waits for a translation; it does not show the quality of the filled translations.
+### 2026-11-19T11:20:06Z bash tp2.2026.check.sh m2
+ok     web_profile exists
+ok     web_enriched: 6 fields
+ok     web_enriched: the join lost and duplicated no row
+ok     web_enriched: every row has a class
+ok     isp_client_class: counts add up to the number of records
+ok     daily file: header
+ok     daily file: 124 data rows
+ok     daily file: no (isp,date) twice
+ok     daily file: mobile, bot, busy_flag are consistent
+ok     tables: one file per season
+ok     season_summary: matches add up to the number of matches
+ok     hass_profile exists
+ok     hass_backlog: 4 fields
+ok     hass_backlog: no glued header
+ok     hass_backlog: every contribution row is there once
+ok     hass_backlog: statuses
+
+RESULT: OK
+

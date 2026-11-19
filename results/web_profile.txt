@@ -1,0 +1,12 @@
+records: 45260
+distinct_os_name (empty counts as a value): 6
+no_city_name: 3339 (7.38% of 45260 records)
+iOS: 46.18% of 45260 records | 46.80% of 44655 records with known OS
+Android: 39.34% of 45260 records | 39.87% of 44655 records with known OS
+mobile (iOS+Android): 85.51% of 45260 records | 86.67% of 44655 records with known OS
+top5_web_client (count, client):
+  14879 Mobile Safari
+   9668 Chrome Mobile
+   6205 Samsung Internet
+   4888 FacebookBot
+   2361 Other
