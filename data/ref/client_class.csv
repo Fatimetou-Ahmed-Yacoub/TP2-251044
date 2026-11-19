@@ -1,0 +1,24 @@
+web_client,class
+FacebookBot,bot
+Facebook,in_app
+WhatsApp,in_app
+Snapchat,in_app
+Mobile Safari UI/WKWebView,in_app
+Chrome Mobile WebView,in_app
+CFNetwork,library
+okhttp,library
+curl,library
+Mobile Safari,browser
+MobileSafari,browser
+Chrome Mobile,browser
+Chrome Mobile iOS,browser
+Samsung Internet,browser
+Chrome,browser
+Edge,browser
+Edge Mobile,browser
+Safari,browser
+Opera,browser
+Opera Mobile,browser
+MiuiBrowser,browser
+Firefox,browser
+Firefox Mobile,browser
